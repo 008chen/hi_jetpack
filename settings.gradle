@@ -1,3 +1,4 @@
+include ':Loglib'
 include ':app'
 rootProject.name = "hi_jetpack"
 include ':nav-compiler'
