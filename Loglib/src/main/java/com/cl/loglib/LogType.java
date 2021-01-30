@@ -1,7 +1,9 @@
 package com.cl.loglib;
 
-import android.support.annotation.IntDef;
+//import android.support.annotation.IntDef;
 import android.util.Log;
+
+import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,7 +17,7 @@ public class LogType {
     public static final int E = Log.ERROR;
     public static final int A = Log.ASSERT;
 
-    @IntDef ({ V, D, I, W, E, A })
+    @IntDef({ V, D, I, W, E, A })
     @Retention(RetentionPolicy.SOURCE)
     public @interface TYPE {
     }

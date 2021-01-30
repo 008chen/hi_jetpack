@@ -4,35 +4,40 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.cl.loglib.LogConfig
+import com.cl.loglib.LogType
+import com.cl.loglib.iLog
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
 import org.devio.`as`.proj.hi_jetpack.navigation.NavUtil
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+      // printLog()
 //        setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(
-            R.id.nav_view
+                R.id.nav_view
         )
 
         //寻找出路由控制器对象,它是我们路由跳转的唯一入口
         val navController: NavController = findNavController(
-            R.id.nav_host_fragment
+                R.id.nav_host_fragment
         )
-        val hostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
+        val hostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
 
         NavUtil.builderNavGraph(
-            this, hostFragment!!.childFragmentManager,
-            navController,
-            R.id.nav_host_fragment
+                this, hostFragment!!.childFragmentManager,
+                navController,
+                R.id.nav_host_fragment
         )
 
         NavUtil.builderBottomBar(
-            navView
+                navView
         )
 
         navView.setOnNavigationItemSelectedListener { item ->
@@ -50,4 +55,7 @@ class MainActivity : AppCompatActivity() {
 //        navController!!.navigateUp()
 //        navController!!.popBackStack(R.id.navigation_dashboard,false)
     }
+
+
+
 }
