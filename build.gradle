@@ -23,6 +23,24 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+
+/**
+ * 配置阶段开始前回调监听
+ */
+this.beforeEvaluate {
+    this.println '--->配置阶段开始前'
+}
+
+/**
+ * 配置阶段完成后回调监听
+ */
+this.afterEvaluate {
+    println '--->配置阶段完成...'
+}
+
+/**
+ * gradle执行完毕的回调监听
+ */
+this.gradle.buildFinished {
+    println '--->gradle执行完毕...'
 }
