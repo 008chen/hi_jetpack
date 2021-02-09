@@ -2,6 +2,15 @@
 buildscript {
     ext.kotlin_version = "1.3.72"
     repositories {
+
+//        maven {
+//            def dir = this.getRootProject().getRootDir().getPath()
+//            url "${dir}/repo"
+//        }
+        maven {
+
+            url 'repo'
+        }
         maven { url 'https://maven.aliyun.com/repository/google' }
         google()
         jcenter()
@@ -9,6 +18,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.imooc.router:router-gradle-plugin:1.0.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -17,6 +27,9 @@ buildscript {
 
 allprojects {
     repositories {
+//        println "xxxx"+this.getRootProject().getRootDir()
+
+
         maven { url 'https://maven.aliyun.com/repository/google' }
         google()
         jcenter()
@@ -28,19 +41,21 @@ allprojects {
  * 配置阶段开始前回调监听
  */
 this.beforeEvaluate {
-    this.println '--->配置阶段开始前'
+    this.println "${this}--->配置阶段开始前"
 }
 
 /**
  * 配置阶段完成后回调监听
  */
 this.afterEvaluate {
-    println '--->配置阶段完成...'
+    println "${this}--->配置阶段完成..."
 }
 
 /**
  * gradle执行完毕的回调监听
  */
 this.gradle.buildFinished {
-    println '--->gradle执行完毕...'
+    println "${this}--->gradle执行完毕..."
 }
+
+println("我是根目录的build.gradle")

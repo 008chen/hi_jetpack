@@ -1,5 +1,9 @@
 package org.devio.`as`.hi.hirouter.ui.home
 
+import android.animation.Animator
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -37,5 +41,70 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Log.e("fragment", "HomeFragment,onResume")
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.e("fragment", "HomeFragment,onAttach1")
+    }
+
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        Log.e("fragment", "HomeFragment,onAttach2")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e("fragment", "HomeFragment,onPause")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.e("fragment", "HomeFragment,onActivityResult")
+    }
+
+    override fun onCreateAnimator(transit: Int, enter: Boolean, nextAnim: Int): Animator? {
+        return super.onCreateAnimator(transit, enter, nextAnim)
+        Log.e("fragment", "HomeFragment,onCreateAnimator")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.e("fragment", "HomeFragment,onCreate")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e("fragment", "HomeFragment,onStart")
+    }
+
+    override fun onDestroyOptionsMenu() {
+        super.onDestroyOptionsMenu()
+        Log.e("fragment", "HomeFragment,onDestroyOptionsMenu")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.e("fragment", "HomeFragment,onDetach")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.e("fragment", "HomeFragment,onDestroyView")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("fragment", "HomeFragment,onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("fragment", "HomeFragment,onDestroy")
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        Log.e("fragment", "HomeFragment,onActivityCreated")
     }
 }

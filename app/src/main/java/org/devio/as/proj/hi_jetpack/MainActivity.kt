@@ -1,24 +1,34 @@
 package org.devio.`as`.proj.hi_jetpack
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.cl.loglib.LogConfig
+import com.cl.loglib.LogManager
 import com.cl.loglib.LogType
+import com.cl.loglib.Printer.ViewPrinter
 import com.cl.loglib.iLog
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_main.*
 import org.devio.`as`.proj.hi_jetpack.navigation.NavUtil
 
 
-class MainActivity2 : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
+
+    //    var navView: BottomNavigationView? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-      // printLog()
+
+        viewPrinter = ViewPrinter(this)
+//        printLog()
+        viewPrinter!!.getViewProvider().showFloatingView()
+        // printLog()
 //        setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(
                 R.id.nav_view
@@ -54,8 +64,42 @@ class MainActivity2 : AppCompatActivity() {
 //
 //        navController!!.navigateUp()
 //        navController!!.popBackStack(R.id.navigation_dashboard,false)
+
+
+        ActivityManager.instance.addFrontBackCallback(object : ActivityManager.FrontBackCallback {
+            override fun onChanged(front: Boolean) {
+                Toast.makeText(applicationContext, "当前处于：${front}", Toast.LENGTH_SHORT).show();
+            }
+        })
+
+        Log.e("fragment", "MainActivity,onCreate")
     }
 
+    override fun onResume() {
+        super.onResume()
+        iLog.d("onResume" + nav_view.width.toString() + "---" + nav_view.height.toString());
+        nav_view.post {
+            iLog.d("onResume:post" + nav_view.width.toString() + "---" + nav_view.height.toString());
+        }
+        nav_view.viewTreeObserver.addOnGlobalLayoutListener {
+            iLog.d("onResume:viewTreeObserver" + nav_view.width.toString() + "---" + nav_view.height.toString());
+        }
 
+    }
 
+    //    问号?，表示该变量是Nullable，不加表示该变量不可为null
+    private var viewPrinter: ViewPrinter? = null
+    private fun printLog() {
+        LogManager.getInstance().addPointer(viewPrinter)
+        iLog.log(object : LogConfig() {
+            override fun includeThread(): Boolean {
+                return true
+            }
+
+            override fun stackTraceDepth(): Int {
+                return 0
+            }
+        }, LogType.E, "DemoApplication", "55555")
+        iLog.a("9900")
+    }
 }

@@ -34,5 +34,8 @@ public class DemoApplication extends Application {
         });
 
         LogManager.getInstance().addPointer(new ConsolePrinter());
+
+
+        ActivityManager.Companion.getInstance().init(this);
     }
 }

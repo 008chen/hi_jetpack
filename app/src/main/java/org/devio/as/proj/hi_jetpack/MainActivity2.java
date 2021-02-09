@@ -13,7 +13,7 @@ import com.cl.loglib.Printer.ViewPrinter;
 import com.cl.loglib.iLog;
 import com.google.gson.Gson;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
     private ViewPrinter viewPrinter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

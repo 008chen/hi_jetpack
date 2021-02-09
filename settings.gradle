@@ -3,6 +3,10 @@ include ':app'
 rootProject.name = "hi_jetpack"
 include ':nav-compiler'
 include ':nav-annotation'
+include ':router-gradle-plugin'
+
+
+println "我是setting.gradle,我的工程路径${rootProject.projectDir}"
 
 long beginOfSetting = System.currentTimeMillis()
 def beginOfConfig
@@ -10,7 +14,7 @@ def configHasBegin = false
 def beginOfProjectConfig = new HashMap()
 def beginOfProjectExcute
 
-println 'settings.gradle执行'
+
 
 gradle.projectsLoaded {project ->
     println "projectsLoaded: 初始化${project}阶段，耗时：" + (System.currentTimeMillis() -
@@ -46,5 +50,40 @@ gradle.taskGraph.beforeTask { task ->
 }
 gradle.buildFinished {
     println '执行阶段，耗时：' + (System.currentTimeMillis() -
-            beginOfProjectExcute) + 'ms'
+           beginOfProjectExcute) + 'ms'
 }
+
+
+//构建生命周期监听
+gradle.addBuildListener(new BuildListener() {
+    @Override
+    void buildStarted(Gradle gradle) {
+        println "BuildListener+buildStarted"
+    }
+
+    @Override
+    void settingsEvaluated(Settings settings) {
+        println "[life-cycle]初始化阶段完成"
+    }
+
+    @Override
+    void projectsLoaded(Gradle gradle) {
+        println "BuildListener+projectsLoaded"
+    }
+
+    @Override
+    void projectsEvaluated(Gradle gradle) {
+        println "[life-cycle]配置阶段完成"
+
+        gradle.rootProject.childProjects.each {
+            name,project ->
+                println("[子工程]-${name}-路径是：${project.getProjectDir()}")
+        }
+    }
+
+    @Override
+    void buildFinished(BuildResult result) {
+        println "[life-cycle]构建结束"
+    }
+})
+
